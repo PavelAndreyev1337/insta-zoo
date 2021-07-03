@@ -3,13 +3,11 @@ package com.example.demo.entity;
 import com.example.demo.entity.enums.ERole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
@@ -42,6 +40,12 @@ public class User {
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     @Column(updatable = false)
     private LocalDateTime createdDate;
+
+    @Transient
+    private Collection<? extends GrantedAuthority> authorities;
+
+    public User() {
+    }
 
     @PrePersist
     protected void onCreate() {
