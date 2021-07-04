@@ -46,7 +46,7 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> getAll() {
+    public List<Post> getAllPosts() {
         return postRepository.findAllByOrderByCreatedDateDesc();
     }
 
