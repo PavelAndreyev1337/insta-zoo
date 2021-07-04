@@ -49,7 +49,7 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-    public List<Comment> getAllForPost(Long postId) {
+    public List<Comment> getAllCommentsForPost(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new PostNotFoundException("Post cannot be found"));
         List<Comment> comments = commentRepository.findAllByPost(post);
