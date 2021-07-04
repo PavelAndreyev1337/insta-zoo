@@ -26,7 +26,6 @@ import java.util.zip.Inflater;
 
 @Service
 public class ImageUploadService {
-
     public static final Logger LOG = LoggerFactory.getLogger(ImageUploadService.class);
 
     private ImageRepository imageRepository;
@@ -34,9 +33,7 @@ public class ImageUploadService {
     private PostRepository postRepository;
 
     @Autowired
-    public ImageUploadService(ImageRepository imageRepository,
-                              UserRepository userRepository,
-                              PostRepository postRepository) {
+    public ImageUploadService(ImageRepository imageRepository, UserRepository userRepository, PostRepository postRepository) {
         this.imageRepository = imageRepository;
         this.userRepository = userRepository;
         this.postRepository = postRepository;
@@ -45,7 +42,7 @@ public class ImageUploadService {
     public ImageModel uploadImageToUser(MultipartFile file, Principal principal) throws IOException {
         User user = getUserByPrincipal(principal);
         LOG.info("Uploading image profile to User {}", user.getUsername());
-        ImageModel userProfileImage = imageRepository.findByUserId(user.getId()).orElseThrow(null);
+        ImageModel userProfileImage = imageRepository.findByUserId(user.getId()).orElse(null);
         if (!ObjectUtils.isEmpty(userProfileImage)) {
             imageRepository.delete(userProfileImage);
         }
@@ -104,7 +101,7 @@ public class ImageUploadService {
         } catch (IOException e) {
             LOG.error("Cannot compress Bytes");
         }
-        System.out.println("Compressed Image Bytes Size - " + outputStream.toByteArray().length);
+        System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
         return outputStream.toByteArray();
     }
 
@@ -114,7 +111,7 @@ public class ImageUploadService {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
         byte[] buffer = new byte[1024];
         try {
-            while(!inflater.finished()) {
+            while (!inflater.finished()) {
                 int count = inflater.inflate(buffer);
                 outputStream.write(buffer, 0, count);
             }

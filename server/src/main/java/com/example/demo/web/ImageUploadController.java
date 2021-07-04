@@ -28,15 +28,15 @@ public class ImageUploadController {
     }
 
     @PostMapping("/{postId}/upload")
-    public ResponseEntity<MessageResponse> uploadImageToPos(@PathVariable("postId") String postId,
-                                                            @RequestParam("file") MultipartFile file,
-                                                            Principal principal) throws IOException {
+    public ResponseEntity<MessageResponse> uploadImageToPost(@PathVariable("postId") String postId,
+                                                             @RequestParam("file") MultipartFile file,
+                                                             Principal principal) throws IOException {
         imageUploadService.uploadImageToPost(file, principal, Long.parseLong(postId));
         return ResponseEntity.ok(new MessageResponse("Image Uploaded Successfully"));
     }
 
     @GetMapping("/profileImage")
-    public ResponseEntity<ImageModel> getImageToUser(Principal principal) {
+    public ResponseEntity<ImageModel> getImageForUser(Principal principal) {
         ImageModel userImage = imageUploadService.getImageToUser(principal);
         return new ResponseEntity<>(userImage, HttpStatus.OK);
     }
