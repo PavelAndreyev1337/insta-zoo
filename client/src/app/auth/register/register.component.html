@@ -1,0 +1,53 @@
+<div class="register-page">
+  <h2>Register</h2>
+  <p>Already have an account?  <a routerLink="/login">Sign in</a></p>
+  <form [formGroup]="registerForm">
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <input matInput
+               formControlName="email">
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput
+               formControlName="username">
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input matInput
+               formControlName="firstname">
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input matInput
+               formControlName="lastname">
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput
+               formControlName="password">
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm password</mat-label>
+        <input type="password" matInput
+               formControlName="confirmPassword">
+      </mat-form-field>
+    </div>
+
+    <button style="width: 5rem" [disabled]="registerForm.invalid" (click)="submit()" mat-flat-button color="primary">
+      Register
+    </button>
+
+  </form>
+</div>
